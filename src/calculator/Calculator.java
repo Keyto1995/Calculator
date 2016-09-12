@@ -30,16 +30,14 @@ public final class Calculator {
 
     public void setFormula(String formula) {
         this.formula = formula;
-        init();
     }
 
     private void init() {
-
         now = root = new RootCal();
         dirtySet = true;
     }
 
-    public void buildTree() throws Exception {
+    private void buildTree() throws Exception {
         //创建树前初始化树
         init();
         //开始建树
@@ -154,19 +152,19 @@ public final class Calculator {
         setNow(newNow);
     }
 
-    void setNow(CalculatorImpl cal) {
+    private void setNow(CalculatorImpl cal) {
         this.now = cal;
     }
 
-    CalculatorImpl findParent() {
+    private CalculatorImpl findParent() {
         return (isHead()) ? null : now.getParent();
     }
 
-    boolean isHead() {
+    private boolean isHead() {
         return now == root;
     }
 
-    boolean isValue() {
+    private boolean isValue() {
         return root.isValue();
     }
 
@@ -202,4 +200,3 @@ public final class Calculator {
     }
 
 }
-
