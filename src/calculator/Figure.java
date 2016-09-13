@@ -12,7 +12,6 @@ package calculator;
  */
 public class Figure extends CalculatorImpl {
 
-    public static final int WEIGHING_COEFFIENT = 0;
 
     long value;
 
@@ -39,12 +38,12 @@ public class Figure extends CalculatorImpl {
 
     @Override
     public double getValue() {
-        double q = 1;
+        int q = 1;
         for (int i = 0; i < dot; i++) {
             q *= 10;
         }
 
-        return value / q;
+        return (double)value / q;
     }
 
     @Override
