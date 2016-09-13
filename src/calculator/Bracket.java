@@ -68,8 +68,8 @@ public class Bracket extends CalculatorImpl {
             this.getParent().put(operator);
         } else if (this.value == null) {
             if (operator instanceof Minus) {
-                put(new Figure(0));
-                put(operator);
+                put(new Figure(0)).put(operator);
+                
             } else {
                 throw new Exception("错误的符号组合!");
             }

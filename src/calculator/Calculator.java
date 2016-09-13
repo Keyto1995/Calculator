@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public final class Calculator {
 
-    String formula;
+    String formula = "";
 
     boolean dirtySet;
 
@@ -26,10 +26,12 @@ public final class Calculator {
 
     public Calculator(String formula) {
         setFormula(formula);
+        init();
     }
 
     public void setFormula(String formula) {
         this.formula = formula;
+        init();
     }
 
     private void init() {
@@ -38,14 +40,13 @@ public final class Calculator {
     }
 
     private void buildTree() throws Exception {
-        //创建树前初始化树
-        init();
-        //开始建树
         char[] charArray = formula.toCharArray();
+        //确定式子不为空
         if (charArray.length == 0) {
             throw new Exception("请输入有效算数式子");
         }
 
+        //开始建树
         for (int i = 0; i < charArray.length; i++) {
             switch (charArray[i]) {
                 case '0':
