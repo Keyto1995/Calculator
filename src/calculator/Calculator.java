@@ -193,7 +193,7 @@ public final class Calculator {
                 System.out.println(">> " + cal.getValue());
             } catch (Exception ex) {
                 System.out.println(ex);
-//                ex.printStackTrace();
+                ex.printStackTrace();
             }
             System.out.println();
 

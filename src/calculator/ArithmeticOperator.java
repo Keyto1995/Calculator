@@ -62,6 +62,9 @@ public abstract class ArithmeticOperator extends CalculatorImpl {
     @Override
     public CalculatorImpl put(ArithmeticOperator operator) throws Exception {
         if (operator.getWeight() > this.getWeight()) {
+            if(null==this.right){
+                throw new Exception("非法符号组合");
+            }
             operator.setParent(this);
             right.setParent(operator);
             operator.setLeft(right);
