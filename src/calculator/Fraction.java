@@ -7,6 +7,7 @@ package calculator;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Objects;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Fraction extends Number {
         this(a, 1);
     }
 
-    private Fraction(long a, long b) {
+     Fraction(long a, long b) {
         this(BigInteger.valueOf(a), BigInteger.valueOf(b));
     }
 
@@ -118,6 +119,23 @@ public class Fraction extends Number {
      */
     public Fraction divide(Fraction divisor) {
         return multiply(divisor.reciprocal());
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if (this == other) return true;
+	if (!(other instanceof Fraction)) return false;
+
+	Fraction otherFraction = (Fraction) other;
+	return this.a.equals(otherFraction.a)&&this.b.equals(otherFraction.b);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.a);
+        hash = 41 * hash + Objects.hashCode(this.b);
+        return hash;
     }
 
     @Override
