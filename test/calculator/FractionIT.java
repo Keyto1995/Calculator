@@ -184,4 +184,240 @@ public class FractionIT {
 
     }
 
+    /**
+     * Test of signum method, of class Fraction.
+     */
+    @Test
+    public void testSignum() {
+        System.out.println("signum");
+        Fraction instance = new Fraction(12);
+        int expResult = 1;
+        int result = instance.signum();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testSignum1() {
+        System.out.println("signum1");
+        Fraction instance = new Fraction(-12);
+        int expResult = -1;
+        int result = instance.signum();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testSignum2() {
+        System.out.println("signum2");
+        Fraction instance = new Fraction(0);
+        int expResult = 0;
+        int result = instance.signum();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of pow method, of class Fraction.
+     */
+    @Test
+    public void testPow() {
+        System.out.println("pow");
+        int n = 0;
+        Fraction instance = new Fraction(3);
+        Fraction expResult = new Fraction(1);
+        Fraction result = instance.pow(n);
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testPow1() {
+        System.out.println("pow1");
+        int n = 3;
+        Fraction instance = new Fraction(3);
+        Fraction expResult = new Fraction(27);
+        Fraction result = instance.pow(n);
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testPow2() {
+        System.out.println("pow2");
+        int n = -3;
+        Fraction instance = new Fraction(3);
+        Fraction expResult = new Fraction(1,27);
+        Fraction result = instance.pow(n);
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testPow3() {
+        System.out.println("pow3");
+        int n = -2;
+        Fraction instance = new Fraction(-3);
+        Fraction expResult = new Fraction(1,9);
+        Fraction result = instance.pow(n);
+        assertEquals(expResult, result);
+
+    }
+    @Test
+    public void testPow4() {
+        System.out.println("pow4");
+        int n = -3;
+        Fraction instance = new Fraction(-3);
+        Fraction expResult = new Fraction(-1,27);
+        Fraction result = instance.pow(n);
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of equals method, of class Fraction.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object other = null;
+        Fraction instance = new Fraction(14);
+        boolean expResult = false;
+        boolean result = instance.equals(other);
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testEquals1() {
+        System.out.println("equals1");
+        Object other = new Fraction(12);
+        Fraction instance = new Fraction(14);
+        boolean expResult = false;
+        boolean result = instance.equals(other);
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testEquals2() {
+        System.out.println("equals2");
+        Object other = new Fraction(14);
+        Fraction instance = new Fraction(14);
+        boolean expResult = true;
+        boolean result = instance.equals(other);
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testEquals3() {
+        System.out.println("equals3");
+        Object other = new Fraction(14,8);
+        Fraction instance = new Fraction(14,8);
+        boolean expResult = true;
+        boolean result = instance.equals(other);
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of hashCode method, of class Fraction.
+     */
+    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        Fraction instance = new Fraction(15);
+        int expResult = new Fraction(15).hashCode();
+        int result = instance.hashCode();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of isInteger method, of class Fraction.
+     */
+    @Test
+    public void testIsInteger() {
+        System.out.println("isInteger");
+        Fraction instance = new Fraction(12);
+        boolean expResult = true;
+        boolean result = instance.isInteger();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testIsInteger1() {
+        System.out.println("isInteger1");
+        Fraction instance = new Fraction(-12);
+        boolean expResult = true;
+        boolean result = instance.isInteger();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testIsInteger2() {
+        System.out.println("isInteger2");
+        Fraction instance = new Fraction(12,4);
+        boolean expResult = true;
+        boolean result = instance.isInteger();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testIsInteger3() {
+        System.out.println("isInteger3");
+        Fraction instance = new Fraction(12,5);
+        boolean expResult = false;
+        boolean result = instance.isInteger();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of toString method, of class Fraction.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Fraction instance = new Fraction(12,35);
+        String expResult = "12 / 35";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testToString1() {
+        System.out.println("toString1");
+        Fraction instance = new Fraction(12,20);
+        String expResult = "3 / 5";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testToString2() {
+        System.out.println("toString2");
+        Fraction instance = new Fraction(-12,35);
+        String expResult = "-12 / 35";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testToString3() {
+        System.out.println("toString3");
+        Fraction instance = new Fraction(12,-35);
+        String expResult = "-12 / 35";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+
+    }
+
 }

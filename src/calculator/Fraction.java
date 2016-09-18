@@ -26,13 +26,24 @@ public class Fraction extends Number {
         this(a, 1);
     }
 
-     Fraction(long a, long b) {
+    Fraction(long a, long b) {
         this(BigInteger.valueOf(a), BigInteger.valueOf(b));
     }
 
     private Fraction(BigInteger a, BigInteger b) {
-        this.a = a;
-        this.b = b;
+        if (b.signum() == 0) {
+            throw new ArithmeticException("分母为零");
+        }
+
+        if (b.signum() == -1) {
+            a = a.negate();
+            b = b.negate();
+        }
+
+        BigInteger tmp = a.gcd(b);
+
+        this.a = a.divide(tmp);
+        this.b = b.divide(tmp);
     }
 
     /**
@@ -41,7 +52,7 @@ public class Fraction extends Number {
      * @return (|this|)
      */
     public Fraction abs() {
-        return (a.signum() == -1) ? negate() : this;
+        return (signum() == -1) ? negate() : this;
     }
 
     /**
@@ -59,7 +70,7 @@ public class Fraction extends Number {
      * @return (b/a)
      */
     public Fraction reciprocal() {
-        switch (a.signum()) {
+        switch (signum()) {
             case 0:
                 throw new ArithmeticException("对 0 求倒数");
             case -1:
@@ -67,8 +78,19 @@ public class Fraction extends Number {
             case 1:
                 return new Fraction(b, a);
             default:
-                throw new ArithmeticException("BigInteger.signum() 返回意外值");
+                throw new ArithmeticException("this.signum() 返回意外值");
         }
+    }
+
+    /**
+     * 判断符号
+     *
+     * 当负、零、正时输出-1、0、1
+     *
+     * @return
+     */
+    public int signum() {
+        return a.signum();
     }
 
     /**
@@ -121,13 +143,41 @@ public class Fraction extends Number {
         return multiply(divisor.reciprocal());
     }
 
-    @Override
-    public boolean equals(Object other){
-        if (this == other) return true;
-	if (!(other instanceof Fraction)) return false;
+    /**
+     * 乘方 操作 (暂不支持非整数次方)
+     *
+     * @param n
+     * @return
+     */
+    public Fraction pow(int n) {
+        if (n >= 0) {
+            return new Fraction(a.pow(n), b.pow(n));
+        } else {
+            return new Fraction(b.pow(-n), a.pow(-n));
+        }
+    }
 
-	Fraction otherFraction = (Fraction) other;
-	return this.a.equals(otherFraction.a)&&this.b.equals(otherFraction.b);
+    /**
+     * this 是整数
+     *
+     * @return
+     */
+    public boolean isInteger() {
+        return b.intValue() == 1;
+    }
+
+    @Override
+    public String toString() {
+        return a.toString() + " / " + b.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (!(other instanceof Fraction)) return false;
+
+        Fraction otherFraction = (Fraction) other;
+        return this.a.equals(otherFraction.a) && this.b.equals(otherFraction.b);
     }
 
     @Override
@@ -142,7 +192,7 @@ public class Fraction extends Number {
     public int intValue() {
         //BigInteger.intValueExact() from 1.8
         return a.divide(b).intValueExact();
-        
+
         //BigInteger.intValue() from 1.6
 //        return a.divide(b).intValue();
     }
@@ -151,22 +201,22 @@ public class Fraction extends Number {
     public long longValue() {
         //BigInteger.longValueExact() from 1.8
         return a.divide(b).longValueExact();
-        
+
         //BigInteger.longValue() from 1.6
 //        return a.divide(b).longValue();
     }
 
     @Override
     public float floatValue() {
-        BigDecimal bd_a=new BigDecimal(a);
-        BigDecimal bd_b=new BigDecimal(b);
+        BigDecimal bd_a = new BigDecimal(a);
+        BigDecimal bd_b = new BigDecimal(b);
         return bd_a.divide(bd_b).floatValue();
     }
 
     @Override
     public double doubleValue() {
-        BigDecimal bd_a=new BigDecimal(a);
-        BigDecimal bd_b=new BigDecimal(b);
+        BigDecimal bd_a = new BigDecimal(a);
+        BigDecimal bd_b = new BigDecimal(b);
         return bd_a.divide(bd_b).doubleValue();
     }
 
