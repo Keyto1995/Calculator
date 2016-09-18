@@ -12,20 +12,31 @@ package calculator;
  */
 public class Figure extends CalculatorImpl {
 
+    private static Fraction ten = new Fraction(10);
 
-    long value;
+    Fraction value;
 
     int dot = -1;
 
     public Figure(int value) {
-        this.value = value;
+        this.value = new Fraction(value);
     }
 
     void merge(Figure figure) {
-        value = value * 10 + figure.value;
+        Fraction tmp = figure.value;
         if (dot > -1) {
             dot += 1;
+
+            for (int i = 0; i < dot; i++) {
+                tmp = tmp.divide(ten);
+            }
+
+        } else {
+            value = value.multiply(ten);
         }
+
+        value = value.add(tmp);
+
     }
 
     void setDot() throws Exception {
@@ -37,13 +48,8 @@ public class Figure extends CalculatorImpl {
     }
 
     @Override
-    public double getValue() {
-        int q = 1;
-        for (int i = 0; i < dot; i++) {
-            q *= 10;
-        }
-
-        return (double)value / q;
+    public Fraction getValue() {
+        return value;
     }
 
     @Override

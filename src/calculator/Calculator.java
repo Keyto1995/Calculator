@@ -169,7 +169,11 @@ public final class Calculator {
         return root.isValue();
     }
 
-    public double getValue() throws Exception {
+    public double doubleValue() throws Exception{
+        return getValue().doubleValue();
+    }
+
+    public Fraction getValue() throws Exception {
         if (dirtySet) {
             buildTree();
             if (!isValue()) {
@@ -190,7 +194,7 @@ public final class Calculator {
             String formula = sc.nextLine();
             cal.setFormula(formula);
             try {
-                System.out.println(">> " + cal.getValue());
+                System.out.println(">> " + cal.doubleValue());
             } catch (Exception ex) {
                 System.out.println(ex);
 //                ex.printStackTrace();

@@ -16,7 +16,7 @@ public class Bracket extends CalculatorImpl {
     private boolean isFinish = false;
 
     @Override
-    public double getValue() {
+    public Fraction getValue() {
         return value.getValue();
     }
 

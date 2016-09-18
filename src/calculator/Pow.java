@@ -13,8 +13,8 @@ public class Pow extends ArithmeticOperator {
     }
 
     @Override
-    public double getValue() {
-        return Math.pow(left.getValue(), right.getValue());
+    public Fraction getValue() {
+        return left.getValue().pow(right.getValue()) ;
     }
 
 }

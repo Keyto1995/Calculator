@@ -17,12 +17,6 @@ public abstract class CalculatorImpl implements CalculatorInterface {
         this.parent = parent;
     }
 
-    @Override
-    public abstract double getValue();
-
-    @Override
-    public abstract boolean isValue();
-
     public abstract CalculatorImpl put(Figure figure) throws Exception;
 
     public abstract CalculatorImpl put(Bracket bracket) throws Exception;

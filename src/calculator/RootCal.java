@@ -20,8 +20,12 @@ public class RootCal extends CalculatorImpl {
         assert true : "在Root节点设置parent";
     }
 
+    public double doubleValue(){
+        return getValue().doubleValue();
+    }
+
     @Override
-    public double getValue() {
+    public Fraction getValue() {
         return value.getValue();
     }
 

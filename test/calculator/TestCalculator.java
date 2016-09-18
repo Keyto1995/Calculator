@@ -73,7 +73,7 @@ public class TestCalculator {
         double value;
         String strResult;
         try {
-            value = calculator.getValue();
+            value = calculator.doubleValue();
             strResult = String.valueOf(value);
         } catch (Exception ex) {
             System.out.println(ex.toString());

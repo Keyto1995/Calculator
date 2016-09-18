@@ -18,9 +18,8 @@ public class Div extends ArithmeticOperator {
     }
 
     @Override
-    public double getValue() {
-        return left.getValue() / right.getValue();
+    public Fraction getValue() {
+        return left.getValue().divide(right.getValue());
     }
-
 
 }

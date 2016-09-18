@@ -11,7 +11,7 @@ package calculator;
  */
 public interface CalculatorInterface {
 
-    public double getValue();
+    public Fraction getValue();
 
     public boolean isValue();
 

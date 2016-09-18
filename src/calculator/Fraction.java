@@ -143,6 +143,14 @@ public class Fraction extends Number {
         return multiply(divisor.reciprocal());
     }
 
+    public Fraction pow(Fraction n) {
+        if (n.isInteger()) {
+            return this.pow(n.intValue());
+        } else {
+            throw new ArithmeticException("乘方操作暂不支持非整数次方");
+        }
+    }
+
     /**
      * 乘方 操作 (暂不支持非整数次方)
      *
