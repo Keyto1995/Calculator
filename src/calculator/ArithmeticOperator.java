@@ -1,7 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 Keyto.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ *
+ * E-mail: Keyto1995@outlook.com
  */
 package calculator;
 
@@ -62,7 +75,7 @@ public abstract class ArithmeticOperator extends CalculatorImpl {
     @Override
     public CalculatorImpl put(ArithmeticOperator operator) throws Exception {
         if (operator.getWeight() > this.getWeight()) {
-            if(null==this.right){
+            if (null == this.right) {
                 throw new Exception("非法符号组合");
             }
             operator.setParent(this);
@@ -70,7 +83,7 @@ public abstract class ArithmeticOperator extends CalculatorImpl {
             operator.setLeft(right);
             this.right = operator;
 
-        }else{
+        } else {
             this.getParent().put(operator);
         }
         return operator;

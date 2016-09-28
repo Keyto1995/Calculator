@@ -1,7 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 Keyto.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ *
+ * E-mail: Keyto1995@outlook.com
  */
 package calculator;
 
@@ -155,7 +168,7 @@ public class Fraction extends Number {
      * 乘方 操作 (暂不支持非整数次方)
      *
      * @param n
-     * @return
+     * @return this的n次方
      */
     public Fraction pow(int n) {
         if (n >= 0) {
@@ -168,7 +181,8 @@ public class Fraction extends Number {
     /**
      * this 是整数
      *
-     * @return
+     * @return <code> true </code>  是整数
+     *          <code> false </code>    不是整数
      */
     public boolean isInteger() {
         return b.intValue() == 1;
@@ -198,19 +212,19 @@ public class Fraction extends Number {
 
     @Override
     public int intValue() {
-        //BigInteger.intValueExact() from 1.8
+        //BigInteger.intValueExact() since 1.8
         return a.divide(b).intValueExact();
 
-        //BigInteger.intValue() from 1.6
+        //BigInteger.intValue() since 1.6
 //        return a.divide(b).intValue();
     }
 
     @Override
     public long longValue() {
-        //BigInteger.longValueExact() from 1.8
+        //BigInteger.longValueExact() since 1.8
         return a.divide(b).longValueExact();
 
-        //BigInteger.longValue() from 1.6
+        //BigInteger.longValue() since 1.6
 //        return a.divide(b).longValue();
     }
 
