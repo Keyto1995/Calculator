@@ -28,7 +28,7 @@ import java.util.Objects;
  *
  * @author Keyto
  */
-public class Fraction extends Number {
+public final class Fraction extends Number {
 
     private final BigInteger a;
     private final BigInteger b;
@@ -183,8 +183,8 @@ public class Fraction extends Number {
     /**
      * this 是整数
      *
-     * @return <code> true </code>  是整数
-     *          <code> false </code>    不是整数
+     * @return <code> true </code> 是整数
+     *         <code> false </code> 不是整数
      */
     public boolean isInteger() {
         return b.intValue() == 1;
