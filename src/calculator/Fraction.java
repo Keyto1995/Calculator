@@ -23,6 +23,8 @@ import java.math.BigInteger;
 import java.util.Objects;
 
 /**
+ * 模拟分数及其操作
+ * 以消除double精度损失
  *
  * @author Keyto
  */
