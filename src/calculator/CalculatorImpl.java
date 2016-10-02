@@ -18,6 +18,10 @@
  */
 package calculator;
 
+/**
+ *
+ * @author Keyto
+ */
 public abstract class CalculatorImpl implements CalculatorInterface {
 
     private CalculatorImpl parent;

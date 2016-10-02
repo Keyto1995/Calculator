@@ -18,6 +18,10 @@
  */
 package calculator;
 
+/**
+ *
+ * @author Keyto
+ */
 public class RootCal extends CalculatorImpl {
 
     private CalculatorImpl value;
@@ -33,7 +37,7 @@ public class RootCal extends CalculatorImpl {
         assert true : "在Root节点设置parent";
     }
 
-    public double doubleValue(){
+    public double doubleValue() {
         return getValue().doubleValue();
     }
 

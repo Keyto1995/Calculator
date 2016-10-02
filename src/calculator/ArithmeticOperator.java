@@ -18,6 +18,10 @@
  */
 package calculator;
 
+/**
+ *
+ * @author Keyto
+ */
 public abstract class ArithmeticOperator extends CalculatorImpl {
 
     protected CalculatorImpl left;

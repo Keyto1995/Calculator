@@ -18,6 +18,10 @@
  */
 package calculator;
 
+/**
+ *
+ * @author Keyto
+ */
 public class Pow extends ArithmeticOperator {
 
     @Override
@@ -27,7 +31,7 @@ public class Pow extends ArithmeticOperator {
 
     @Override
     public Fraction getValue() {
-        return left.getValue().pow(right.getValue()) ;
+        return left.getValue().pow(right.getValue());
     }
 
 }
