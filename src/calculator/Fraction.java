@@ -34,7 +34,16 @@ public final class Fraction extends Number {
     private final BigInteger b;
 
     public Fraction() {
-        this(new BigInteger("0"), new BigInteger("1"));
+        this.a = new BigInteger("0");
+        this.b = new BigInteger("1");
+    }
+
+    public Fraction(String val) {
+        this(new BigDecimal(val));
+    }
+
+    public Fraction(BigDecimal val) {
+        this(val.unscaledValue(), BigInteger.TEN.pow(val.scale()));
     }
 
     public Fraction(long a) {
@@ -178,6 +187,29 @@ public final class Fraction extends Number {
         } else {
             return new Fraction(b.pow(-n), a.pow(-n));
         }
+    }
+
+    //num是被开方数，n是开方次数,precision设置保留几位小数
+    public static String rootN_Decimal(String num, int n, int precision) {
+
+        BigDecimal x = new BigDecimal(new BigInteger(num).divide(new BigInteger("" + n)));
+        BigDecimal x0 = BigDecimal.ZERO;
+
+        BigDecimal e = new BigDecimal("0.1");
+        for (int i = 1; i < precision; ++i) {
+            e = e.divide(BigDecimal.TEN, i + 1, BigDecimal.ROUND_HALF_EVEN);
+        }
+
+        BigDecimal K = new BigDecimal(num);
+        BigDecimal m = new BigDecimal(n);
+
+        long i = 0;
+        while (x.subtract(x0).abs().compareTo(e) > 0) {
+            x0 = x;
+            x = x.add(K.subtract(x.pow(n)).divide(m.multiply(x.pow(n - 1)), precision, BigDecimal.ROUND_HALF_EVEN));
+            ++i;
+        }
+        return x + " " + i;
     }
 
     /**
