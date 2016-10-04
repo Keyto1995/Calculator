@@ -315,19 +315,30 @@ public final class Fraction extends Number {
 
     @Override
     public float floatValue() {
+        if (a.signum() == 0) {
+            return 0F;
+        }
+
         BigDecimal bd_a = new BigDecimal(a);
         BigDecimal bd_b = new BigDecimal(b);
 
         BigInteger e = b.divide(a);
-        System.out.println(e);
-        return bd_a.divide(bd_b, e.intValue() + 18, BigDecimal.ROUND_FLOOR).floatValue();
+        int precision = e.bitLength() / 3 + 10;
+        return bd_a.divide(bd_b, precision, BigDecimal.ROUND_FLOOR).floatValue();
     }
 
     @Override
     public double doubleValue() {
+        if (a.signum() == 0) {
+            return 0;
+        }
+
         BigDecimal bd_a = new BigDecimal(a);
         BigDecimal bd_b = new BigDecimal(b);
-        return bd_a.divide(bd_b, 20, BigDecimal.ROUND_FLOOR).doubleValue();
+
+        BigInteger e = b.divide(a);
+        int precision = e.bitLength() / 3 + 18;
+        return bd_a.divide(bd_b, precision, BigDecimal.ROUND_FLOOR).doubleValue();
     }
 
 }
