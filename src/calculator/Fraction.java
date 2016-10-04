@@ -322,8 +322,7 @@ public final class Fraction extends Number {
         BigDecimal bd_a = new BigDecimal(a);
         BigDecimal bd_b = new BigDecimal(b);
 
-        BigInteger e = b.divide(a);
-        int precision = e.bitLength() / 3 + 10;
+        int precision = b.divide(a).bitLength() / 3 + 10;
         return bd_a.divide(bd_b, precision, BigDecimal.ROUND_FLOOR).floatValue();
     }
 
@@ -336,8 +335,7 @@ public final class Fraction extends Number {
         BigDecimal bd_a = new BigDecimal(a);
         BigDecimal bd_b = new BigDecimal(b);
 
-        BigInteger e = b.divide(a);
-        int precision = e.bitLength() / 3 + 18;
+        int precision = b.divide(a).bitLength() / 3 + 18;
         return bd_a.divide(bd_b, precision, BigDecimal.ROUND_FLOOR).doubleValue();
     }
 
