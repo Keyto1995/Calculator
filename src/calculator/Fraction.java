@@ -33,10 +33,12 @@ public final class Fraction extends Number {
     private final BigInteger a;
     private final BigInteger b;
 
-    public Fraction() {
-        this.a = new BigInteger("0");
-        this.b = new BigInteger("1");
-    }
+    /**
+     * 常用分数常量
+     */
+    public static Fraction ZERO = new Fraction(0, 1);
+    public static Fraction ONE = new Fraction(1, 1);
+    public static Fraction TEN = new Fraction(10, 1);
 
     public Fraction(String val) {
         this(new BigDecimal(val));
@@ -68,6 +70,26 @@ public final class Fraction extends Number {
 
         this.a = a.divide(tmp);
         this.b = b.divide(tmp);
+    }
+
+    /**
+     * 把整数val转化为分数
+     *
+     * @param val
+     * @return fraction==val
+     */
+    public static Fraction valueOf(long val) {
+        return new Fraction(val);
+    }
+
+    /**
+     * 把浮点数val转化为分数
+     *
+     * @param val
+     * @return fraction==val
+     */
+    public static Fraction valueOf(double val) {
+        return new Fraction(BigDecimal.valueOf(val));
     }
 
     /**
@@ -190,26 +212,38 @@ public final class Fraction extends Number {
     }
 
     //num是被开方数，n是开方次数,precision设置保留几位小数
-    public static String rootN_Decimal(String num, int n, int precision) {
-
-        BigDecimal x = new BigDecimal(new BigInteger(num).divide(new BigInteger("" + n)));
+    public static BigDecimal rootN_Decimal(BigInteger num, int n, int precision) {
+        //预测值 A/k
+        BigDecimal x = new BigDecimal(num.divide(BigInteger.valueOf(n)));
         BigDecimal x0 = BigDecimal.ZERO;
 
-        BigDecimal e = new BigDecimal("0.1");
-        for (int i = 1; i < precision; ++i) {
-            e = e.divide(BigDecimal.TEN, i + 1, BigDecimal.ROUND_HALF_EVEN);
-        }
+        //记录精度
+        BigDecimal e = new BigDecimal("0.1").pow(precision);
+        //A=x^k
+        BigDecimal A = new BigDecimal(num);
+        BigDecimal k = new BigDecimal(n);
 
-        BigDecimal K = new BigDecimal(num);
-        BigDecimal m = new BigDecimal(n);
-
-        long i = 0;
         while (x.subtract(x0).abs().compareTo(e) > 0) {
             x0 = x;
-            x = x.add(K.subtract(x.pow(n)).divide(m.multiply(x.pow(n - 1)), precision, BigDecimal.ROUND_HALF_EVEN));
-            ++i;
+//            //公式：x'=x+(A/x^(k-1)-x)/k
+//            x = x.add(A.divide(x.pow(n - 1), precision, BigDecimal.ROUND_FLOOR).subtract(x).divide(k, precision, BigDecimal.ROUND_FLOOR));
+            //公式·改：x'=x+(A-(x^k))/(k*x^(k-1))
+            x = x.add(A.subtract(x.pow(n)).divide(k.multiply(x.pow(n - 1)), precision, BigDecimal.ROUND_HALF_EVEN));
         }
-        return x + " " + i;
+
+        return x;
+    }
+
+    /**
+     * 若this小于val则返回-1;
+     * 若this等于val则返回0;
+     * 若this大于val则返回1;
+     *
+     * @param val
+     * @return
+     */
+    public int compareTo(Fraction val) {
+        return this.subtract(val).signum();
     }
 
     /**
@@ -273,7 +307,7 @@ public final class Fraction extends Number {
     public double doubleValue() {
         BigDecimal bd_a = new BigDecimal(a);
         BigDecimal bd_b = new BigDecimal(b);
-        return bd_a.divide(bd_b).doubleValue();
+        return bd_a.divide(bd_b, 20, BigDecimal.ROUND_FLOOR).doubleValue();
     }
 
 }
