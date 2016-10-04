@@ -93,6 +93,29 @@ public final class Fraction extends Number {
     }
 
     /**
+     * 把高精度浮点数val转化为分数
+     *
+     * @param val
+     * @return fraction==val
+     */
+    public static Fraction valueOf(BigDecimal val) {
+        if (val.scale() < 0) {
+            val = val.setScale(0);
+        }
+        return new Fraction(val.unscaledValue(), BigInteger.TEN.pow(val.scale()));
+    }
+
+    /**
+     * 把字符串val转化为分数
+     *
+     * @param val
+     * @return fraction==val
+     */
+    public static Fraction valueOf(String val) {
+        return Fraction.valueOf(new BigDecimal(val));
+    }
+
+    /**
      * 绝对值操作
      *
      * @return (|this|)
@@ -218,7 +241,7 @@ public final class Fraction extends Number {
         BigDecimal x0 = BigDecimal.ZERO;
 
         //记录精度
-        BigDecimal e = new BigDecimal("0.1").pow(precision);
+        BigDecimal e = BigDecimal.ONE.scaleByPowerOfTen(-precision);
         //A=x^k
         BigDecimal A = new BigDecimal(num);
         BigDecimal k = new BigDecimal(n);
@@ -280,27 +303,22 @@ public final class Fraction extends Number {
 
     @Override
     public int intValue() {
-        //BigInteger.intValueExact() since 1.8
-        return a.divide(b).intValueExact();
-
-        //BigInteger.intValue() since 1.6
-//        return a.divide(b).intValue();
+        return a.divide(b).intValue();
     }
 
     @Override
     public long longValue() {
-        //BigInteger.longValueExact() since 1.8
-        return a.divide(b).longValueExact();
-
-        //BigInteger.longValue() since 1.6
-//        return a.divide(b).longValue();
+        return a.divide(b).longValue();
     }
 
     @Override
     public float floatValue() {
         BigDecimal bd_a = new BigDecimal(a);
         BigDecimal bd_b = new BigDecimal(b);
-        return bd_a.divide(bd_b).floatValue();
+
+        BigInteger e = b.divide(a);
+        System.out.println(e);
+        return bd_a.divide(bd_b, e.intValue() + 18, BigDecimal.ROUND_FLOOR).floatValue();
     }
 
     @Override
