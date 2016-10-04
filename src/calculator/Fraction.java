@@ -40,10 +40,12 @@ public final class Fraction extends Number {
     public static Fraction ONE = new Fraction(1, 1);
     public static Fraction TEN = new Fraction(10, 1);
 
+    @Deprecated
     public Fraction(String val) {
         this(new BigDecimal(val));
     }
 
+    @Deprecated
     public Fraction(BigDecimal val) {
         this(val.unscaledValue(), BigInteger.TEN.pow(val.scale()));
     }
